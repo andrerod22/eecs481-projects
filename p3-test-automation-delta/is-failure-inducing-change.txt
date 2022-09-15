@@ -1,0 +1,25 @@
+#!/bin/bash
+reverse_patches(){
+    #Reverse all patches
+    echo 'Not working'
+}
+
+#Apply patches to wireworld-original.c
+#Using cp () Piazza @707
+#https://piazza.com/class/ksq90r30xl8h1?cid=707
+cp wireworld-original.c wireworld-backup.c
+for i in $* ; do
+    patch -p0 wireworld-original.c < patch.$i
+done
+gcc -c wireworld-original.c
+case $? in
+    0)
+    #reverse_patches
+    cp wireworld-backup.c wireworld-original.c
+    exit 0
+    ;;
+    *)
+    #reverse_patches
+    cp wireworld-backup.c wireworld-original.c
+    exit 1
+esac
